@@ -1,0 +1,32 @@
+function Awake()
+    print("Lua Awake")
+end
+
+function OnBtnClick(btn)	
+	return function()
+		print("btn "..btn.." be clicked!")
+	end
+end
+
+
+function Start()
+    print("Lua Start")
+    local uiComponents = self.uiComponents
+    local flag,leftBtn = uiComponents:TryGetValue("LeftBtn", nil)
+    assert(flag,"left Btn is null")
+    leftBtn:GetComponent("Button").onClick:AddListener(OnBtnClick("left"))
+    --hi()
+    --[[
+    local flag,rightBtn = uiComponents:TryGetValue("RightBtn", nil)
+    assert(flag,"right Btn is null")
+    rightBtn:GetComponent("Button").onClick:AddListener(onBtnClick(rightBtn.name))
+    local flag,midBtn = uiComponents:TryGetValue("MidBtn", nil)
+    assert(flag,"Mid Btn is null")
+    midBtn:GetComponent("Button").onClick:AddListener(onBtnClick(midBtn.name))
+    ]]
+end
+
+
+function Update()
+    
+end

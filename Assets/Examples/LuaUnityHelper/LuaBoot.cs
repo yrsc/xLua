@@ -24,12 +24,8 @@ namespace xLuaSimpleFramework
         {
             _luaEnv.AddLoader((ref string filename) => 
             {
-                if (filename == "InMemory")
-                {
-                    string script = "return {ccc = 9999}";
-                    return System.Text.Encoding.UTF8.GetBytes(script);
-                }
-                return null;
+				string script = SimpleLoader.LoadLua(filename);
+				return System.Text.Encoding.UTF8.GetBytes(script);
             });
         }
     }

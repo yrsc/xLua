@@ -5,6 +5,7 @@ using XLua;
 
 namespace xLuaSimpleFramework
 {	
+	[LuaCallCSharp]
 	public class LuaBehaviour : MonoBehaviour {
 
 		protected Action _luaStart;
@@ -29,8 +30,10 @@ namespace xLuaSimpleFramework
 				_scriptEnv.SetMetaTable(meta);
 				meta.Dispose();
 				_scriptEnv.Set("self", this);
-                string luaPathDir = Constant.luaRootPath + luaScrpitPath;
-                string luaStr = SimpleLoader.LoadFileToStr(luaPathDir,"lua");
+            //    string luaPathDir = Constant.luaRootPath + luaScrpitPath;
+//                string luaStr = SimpleLoader.LoadFileToStr(luaPathDir,"lua");
+				string luaStr = string.Format("require('{0}')",luaScrpitPath);
+				Debug.Log("lua str is " + luaStr);
 				luaEnv.DoString(luaStr, "LuaBehaviour",_scriptEnv);
 				Action luaAwake = _scriptEnv.Get<Action>("Awake");
 				_scriptEnv.Get("Start", out _luaStart);

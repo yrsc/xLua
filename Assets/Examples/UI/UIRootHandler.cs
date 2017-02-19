@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using XLua;
 
 namespace xLuaSimpleFramework
 {
@@ -17,17 +17,6 @@ namespace xLuaSimpleFramework
 			{
 				_uiComponents[uiComponent.name] = uiComponent;
 			}
-		}
-
-		/*
-		void Start()
-		{
-			Dictionary<string,UIComponent>.Enumerator iter = _uiComponents.GetEnumerator();
-			while(iter.MoveNext())
-			{
-				
-			}
-			base.Start();
-		}*/
+		}			
 	}
 }

@@ -5,7 +5,7 @@ namespace xLuaSimpleFramework
 {
     public class Constant
     {
-        public static string luaRootPath = "Examples/Lua/";
+		public const string luaRootPath = "Examples/Lua/";
 
     }
 }

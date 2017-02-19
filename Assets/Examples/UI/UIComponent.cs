@@ -1,22 +1,19 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
+﻿using XLua;
 
 namespace xLuaSimpleFramework
 {
+	[LuaCallCSharp]	
 	public class UIComponent : LuaBehaviour 
 	{
 		public UIRootHandler rootHanlder;
 
-		void Awake()
+		new void Awake()
 		{
+			base.Awake();
 			if(rootHanlder != null)
 			{
 				rootHanlder.Resgister(this);
 			}
-
 		}			
 	}
 }

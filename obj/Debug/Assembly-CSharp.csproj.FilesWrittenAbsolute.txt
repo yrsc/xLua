@@ -1,0 +1,17 @@
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/yr/develop/xLuaSimpleFramework/obj/Debug/Assembly-CSharp.dll
+/Users/yr/develop/xLuaSimpleFramework/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/UnityEngine.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/UnityEditor.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Mono.Cecil.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Unity.DataContract.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/yr/develop/xLuaSimpleFramework/Temp/bin/Debug/Mono.Cecil.Mdb.dll

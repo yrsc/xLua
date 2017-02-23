@@ -1,5 +1,7 @@
-local loginUI = require("LoginUI")
-
+print("load loginUIController")
+print(loginUI)
+--local loginUI = require("LoginUI")
+--[[
 function OnBtnClick(btn)	
   return function()
     if(btn == loginUI.loginBtn) then
@@ -7,3 +9,4 @@ function OnBtnClick(btn)
     end
 	end
 end
+]]

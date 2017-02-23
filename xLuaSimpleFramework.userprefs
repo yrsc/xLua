@@ -1,12 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/XLua/Tutorial/LuaCallCSharp/LuaCallCs.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets/Examples/LuaUnityHelper/LuaBehaviour.cs" Line="9" Column="2" />
-      <File FileName="Assets/Examples/Utility/SimpleLoader.cs" Line="23" Column="4" />
-      <File FileName="Assets/XLua/Tutorial/LuaCallCSharp/LuaCallCs.cs" Line="186" Column="46" />
+      <File FileName="Assets/Examples/LuaUnityHelper/LuaBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets/Examples/Utility/SimpleLoader.cs" Line="1" Column="1" />
+      <File FileName="Assets/XLua/Tutorial/LuaCallCSharp/LuaCallCs.cs" Line="1" Column="1" />
       <File FileName="Assets/XLua/Examples/09_GenericMethod/Foo.cs" Line="1" Column="1" />
-      <File FileName="Assets/Examples/UI/UIComponent.cs" Line="17" Column="42" />
+      <File FileName="Assets/Examples/UI/UIComponent.cs" Line="1" Column="1" />
+      <File FileName="Assets/Examples/LuaUnityHelper/LuaBoot.cs" Line="1" Column="1" />
+      <File FileName="Assets/Examples/UI/Constant.cs" Line="1" Column="1" />
+      <File FileName="Assets/XLua/Src/StaticLuaCallbacks.cs" Line="1" Column="1" />
+      <File FileName="Assets/XLua/Tutorial/LoadLuaScript/Loader/CustomLoader.cs" Line="1" Column="1" />
+      <File FileName="Assets/XLua/Tutorial/CSharpCallLua/CSCallLua.cs" Line="1" Column="1" />
+      <File FileName="Assets/XLua/Src/LuaDLL.cs" Line="1" Column="1" />
+      <File FileName="Assets/XLua/Src/LuaTable.cs" Line="1" Column="1" />
+      <File FileName="Assets/XLua/Src/LuaEnv.cs" Line="1" Column="1" />
+      <File FileName="Assets/XLua/Src/ObjectTranslator.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

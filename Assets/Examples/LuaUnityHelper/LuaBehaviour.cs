@@ -30,21 +30,21 @@ namespace xLuaSimpleFramework
 				_scriptEnv.SetMetaTable(meta);
 				meta.Dispose();
 				_scriptEnv.Set("self", this);
-            //    string luaPathDir = Constant.luaRootPath + luaScrpitPath;
-//                string luaStr = SimpleLoader.LoadFileToStr(luaPathDir,"lua");
-				string luaStr = string.Format("require('{0}')",luaScrpitPath);
-				Debug.Log("lua str is " + luaStr);
+				string luaStr = SimpleLoader.LoadLua(luaScrpitPath);
+			//	string luaStr = string.Format("require('{0}')",luaScrpitPath);
+			//	Debug.Log("lua str is " + luaStr);
+				_scriptEnv = null;
 				luaEnv.DoString(luaStr, "LuaBehaviour",_scriptEnv);
-				Action luaAwake = _scriptEnv.Get<Action>("Awake");
-				_scriptEnv.Get("Start", out _luaStart);
-				_scriptEnv.Get("Update", out _luaUpdate);
-				_scriptEnv.Get("OnDestroy", out _luaOnDestroy);
-				_scriptEnv.Get("OnEnable", out _luaOnEnable);
-				_scriptEnv.Get("OnDisable", out _luaOnDisable);
-				if (luaAwake != null)
-				{
-					luaAwake();
-				}
+//				Action luaAwake = _scriptEnv.Get<Action>("Awake");
+//				_scriptEnv.Get("Start", out _luaStart);
+//				_scriptEnv.Get("Update", out _luaUpdate);
+//				_scriptEnv.Get("OnDestroy", out _luaOnDestroy);
+//				_scriptEnv.Get("OnEnable", out _luaOnEnable);
+//				_scriptEnv.Get("OnDisable", out _luaOnDisable);
+//				if (luaAwake != null)
+//				{
+//					luaAwake();
+//				}
 			}
 
 		}

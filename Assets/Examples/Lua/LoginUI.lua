@@ -2,6 +2,13 @@ local userName
 local pwd
 local loginBtn
 
+loginUI = {1,2,3}
+print(loginUI)
+--require("Test")
+require("LoginUIController")
+for n in pairs(_G) do print(n) end
+--print(loginUIController)
+--[[
 function Start()
     local uiComponents = self.uiComponents
     local flag = false;
@@ -15,8 +22,8 @@ function Start()
     pwd = pwd:GetComponent("InputField")
     -------- get login btn
     flag,loginBtn = uiComponents:TryGetValue("LoginBtn", nil)
-    loginBtn:GetComponent("Button").onClick:AddListener(OnBtnClick(loginBtn))
+    --loginBtn:GetComponent("Button").onClick:AddListener(loginUIController.OnBtnClick(loginBtn))
 end
 
-
+]]
 

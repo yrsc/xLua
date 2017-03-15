@@ -10,7 +10,6 @@ namespace xLuaSimpleFramework
 
 		new void Awake()
 		{
-			base.Awake();
 			if(rootHanlder != null)
 			{
 				rootHanlder.Resgister(this);

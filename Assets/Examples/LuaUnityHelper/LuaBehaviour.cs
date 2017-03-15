@@ -19,7 +19,7 @@ namespace xLuaSimpleFramework
 		{
 			get{return _scriptEnv;}
 		}
-
+	
 		public string luaScrpitPath;
 	
 		protected void Awake()
@@ -54,8 +54,6 @@ namespace xLuaSimpleFramework
 						luaAwake(_scriptEnv);
 					}				
 				}
-			
-
 			}
 
 		}
@@ -91,6 +89,7 @@ namespace xLuaSimpleFramework
 			if(_luaUpdate != null)
 			{
 				_luaUpdate(_scriptEnv);
+
 			}
 		}
 

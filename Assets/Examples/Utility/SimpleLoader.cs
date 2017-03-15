@@ -36,5 +36,10 @@ namespace xLuaSimpleFramework
 				return GameObject.Instantiate(go);
 			return null;
 		}
+        public static string LoadFileToStr(string path,string suffix)
+        {
+            string luaPath = Application.dataPath +"/" + path + "." + suffix;
+            return File.ReadAllText(luaPath);
+        }
     }
 }

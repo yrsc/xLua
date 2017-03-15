@@ -14,7 +14,7 @@ function LoginUI:OnBtnClick(btn)
   return function()
     if(btn == self.loginBtn) then
       if self.userNameInput.text == "123" and self.pwdInput.text == "123" then    
-        print("login succeed")
+        self.controller:OnLogin()
       else
         print("username and pwd should be 123 while your username is "..self.userNameInput.text.." and pwd is"..self.pwdInput.text)        
         --local loader = CS.xLuaSimpleFramework.SimpleLoader

@@ -1,5 +1,5 @@
 require("System/ClassGenerator")
 require("UI/LoginUI/LoginUIController")
+require("Utility/UnityLoader")
 
-loginUIController:OpenLoginPanel()
-loginUIController:OpenLoginPanel()
+LoginUIController:OpenLoginPanel()

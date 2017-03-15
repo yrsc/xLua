@@ -4,7 +4,7 @@ using XLua;
 
 namespace xLuaSimpleFramework
 {
-	
+	[LuaCallCSharp]
 	public class LevelLoadMgr
 	{
 		public static void LoadLevelSync(string scene)

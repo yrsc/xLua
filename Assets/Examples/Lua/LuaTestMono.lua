@@ -25,7 +25,7 @@ function OnBtnClick(btn)
 end
 
 
-function Start()
+function Start()  
     print("Lua Start")
     local uiComponents = self.uiComponents
     local flag = false;

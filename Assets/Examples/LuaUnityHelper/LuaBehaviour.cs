@@ -23,10 +23,8 @@ namespace xLuaSimpleFramework
 		public string luaScrpitPath;
 	
 		protected void Awake()
-		{						
-			if(!string.IsNullOrEmpty(luaScrpitPath))
-			{
-
+		{			
+			if(!string.IsNullOrEmpty(luaScrpitPath))			{
 				LuaEnv luaEnv = LuaBoot.luaEnv;
 				//_scriptEnv = luaEnv.NewTable();
 				//LuaTable meta = luaEnv.NewTable();

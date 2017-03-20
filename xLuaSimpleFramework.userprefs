@@ -1,8 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Examples/LuaUnityHelper/LuaBehaviour.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets/Examples/LuaUnityHelper/LuaBehaviour.cs" Line="28" Column="1" />
+      <File FileName="Assets/Examples/LuaUnityHelper/LuaBehaviour.cs" Line="1" Column="1" />
       <File FileName="Assets/Examples/UI/UIRootHandler.cs" Line="1" Column="1" />
       <File FileName="Assets/Examples/Utility/SimpleLoader.cs" Line="1" Column="1" />
       <File FileName="Assets/XLua/Tutorial/LuaCallCSharp/LuaCallCs.cs" Line="1" Column="1" />
@@ -14,12 +14,12 @@
       <File FileName="Assets/XLua/Tutorial/LoadLuaScript/Loader/CustomLoader.cs" Line="1" Column="1" />
       <File FileName="Assets/XLua/Tutorial/CSharpCallLua/CSCallLua.cs" Line="1" Column="1" />
       <File FileName="Assets/XLua/Src/LuaDLL.cs" Line="1" Column="1" />
-      <File FileName="Assets/XLua/Src/LuaEnv.cs" Line="362" Column="19" />
+      <File FileName="Assets/XLua/Src/LuaEnv.cs" Line="1" Column="1" />
       <File FileName="Assets/XLua/Src/ObjectTranslator.cs" Line="1" Column="1" />
       <File FileName="Assets/XLua/Src/LuaTable.cs" Line="1" Column="1" />
       <File FileName="Assets/Examples/Utility/LevelLoadMgr.cs" Line="1" Column="1" />
       <File FileName="Assets/XLua/Src/MethodWarpsCache.cs" Line="1" Column="1" />
-      <File FileName="Assets/XLua/Examples/ExampleGenConfig.cs" Line="49" Column="30" />
+      <File FileName="Assets/XLua/Examples/ExampleGenConfig.cs" Line="50" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

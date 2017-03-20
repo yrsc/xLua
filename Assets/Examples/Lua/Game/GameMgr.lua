@@ -1,12 +1,12 @@
 require("Boot/BaseDependcy")
 require("UI/BattleUI/BattleUIController")
 require("Game/InputMgr")
+require("Game/CharacterController")
 
 GameMgr = class("GameMgr")
 
 function GameMgr:Awake()
-  --TODO:use charactermgr create the character
-  local character = UnityLoader:Instantiate("Assets/Examples/ABResrouces/Prefab/Character/Cha_Bow_003.prefab")    
+  CharacterController:CreateCharacter()
   BattleUIController:OpenBattleUI()
 end
 

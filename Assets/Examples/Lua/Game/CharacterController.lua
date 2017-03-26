@@ -1,7 +1,7 @@
 CharacterController = class("CharacterController")
 
 function CharacterController:CreateCharacter()
-  self.model = UnityLoader:Instantiate("Assets/Examples/ABResrouces/Prefab/Character/Cha_Bow_003.prefab")    
+  self.model = UnityLoader:Instantiate(constant.RES_ROOT_PATH.."Prefab/Character/Cha_Bow_003.prefab")    
   self.speed = 3
   self.Animator = self.model:GetComponent("Animator")
 end

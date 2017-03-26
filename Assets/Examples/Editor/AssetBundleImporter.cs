@@ -4,27 +4,31 @@ using UnityEditor;
 
 public class AssetBundleImporter : AssetPostprocessor {
 
+	static string prefix = "Assets/";
+	public static int strlenOfAssets = prefix.Length;
+
 	static void OnPostprocessAllAssets (string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)   
 	{  
 		//assetbundle can not contain .cs only
 		foreach (var str in importedAssets)  
 		{  
-			if(!str.EndsWith(".cs"))  
-			{  
+			//the file which in ABResources folder can be set as assetbundle
+			if(!str.EndsWith(".cs") && str.StartsWith("Assets/Examples/ABResources"))  
+			{  				
 				AssetImporter importer = AssetImporter.GetAtPath(str);  
-				importer.assetBundleName = str;  
+				importer.assetBundleName = str.Substring(strlenOfAssets);  
 			}  
-		}  
+		}
 
 		foreach (var str in movedAssets)  
 		{  
-			if(!str.EndsWith(".cs"))  
+			Debug.Log("str is " + str);
+			if(!str.EndsWith(".cs") && str.StartsWith("Assets/Examples/ABResources"))  
 			{  
 				AssetImporter importer = AssetImporter.GetAtPath(str);  
-				importer.assetBundleName = str;  
+				importer.assetBundleName = str.Substring(strlenOfAssets);  
 			}  
 		}  
-	}  
-
+	}  		
 
 }

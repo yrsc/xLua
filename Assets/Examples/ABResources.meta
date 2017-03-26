@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 8c2e7543e168c4e5cbf8b187ed37ec6a
+guid: c4c096d951fb24fba8012c3628e91257
 folderAsset: yes
-timeCreated: 1489591827
+timeCreated: 1487344255
 licenseType: Free
 DefaultImporter:
   userData: 
-  assetBundleName: examples/lua/utility
+  assetBundleName: examples/abresources
   assetBundleVariant: 

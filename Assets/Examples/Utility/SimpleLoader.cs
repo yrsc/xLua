@@ -8,38 +8,42 @@ namespace xLuaSimpleFramework
 	[LuaCallCSharp]
     public class SimpleLoader
     {
+		public static string RES_ROOT_PATH = "Assets/";
         public static T Load<T>(string path) where T : Object
         {
-            return UnityEditor.AssetDatabase.LoadAssetAtPath<T>(path);
+			#if UNITY_EDITOR && !LOAD_ASSETBUNDLE_INEDITOR
+				path = RES_ROOT_PATH + path;
+            	return UnityEditor.AssetDatabase.LoadAssetAtPath<T>(path);
+			#else				
+				return AssetbundleLoader.LoadRes<T>(path);
+			#endif
         }
 
 		public static string LoadLua(string path,string rootPath = Constant.luaRootPath)
 		{
-			string luaPath = Application.dataPath + "/" + rootPath + path + ".lua";
-			return LoadFileToStr(luaPath);
+			#if UNITY_EDITOR && !LOAD_ASSETBUNDLE_INEDITOR
+				string luaPath = Application.dataPath + "/" + rootPath + path + ".lua";
+				return LoadFileToStr(luaPath);
+			#else
+				string luaPath = "Examples/ABResources/Lua/" + path + ".txt";
+				//the characters of assetbundle path are lower characters
+			//	luaPath = luaPath.ToLower();
+				TextAsset content = AssetbundleLoader.LoadRes<TextAsset>(luaPath);
+				return content.text;
+			#endif
 		}
 
         public static string LoadFileToStr(string path)
         {
 			return File.ReadAllText(path);
         }
-			
-		public static GameObject LoadGameObject(string path)
-		{
-			return UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
-		}
 
 		public static GameObject InstantiateGameObject(string path)
 		{
-			GameObject go = LoadGameObject(path);
+			GameObject go = Load<GameObject>(path);
 			if(go != null)
 				return GameObject.Instantiate(go);
 			return null;
-		}
-        public static string LoadFileToStr(string path,string suffix)
-        {
-            string luaPath = Application.dataPath +"/" + path + "." + suffix;
-            return File.ReadAllText(luaPath);
-        }
+		}			
     }
 }

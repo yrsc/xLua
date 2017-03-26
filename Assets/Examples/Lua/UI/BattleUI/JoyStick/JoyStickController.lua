@@ -3,7 +3,7 @@ JoyStickController = class("JoyStickController")
 local radius = 150
 function JoyStickController:CreateJoyStick()
   assert(self.joyStick == nil,"joy stick resource not release")
-  self.joyStick = UnityLoader:Instantiate("Assets/Examples/ABResrouces/UI/BattleUI/StickBG.prefab")
+  self.joyStick = UnityLoader:Instantiate(constant.RES_ROOT_PATH.."UI/BattleUI/StickBG.prefab")
   self.joyCircle = self.joyStick.transform:Find("StickCircle")
   self.initPos = self.joyStick.transform.position
   return self.joyStick

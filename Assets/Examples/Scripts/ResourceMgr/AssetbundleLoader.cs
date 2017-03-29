@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace xLuaSimpleFramework
 {
@@ -21,7 +22,9 @@ namespace xLuaSimpleFramework
 			#endif
 		}
 
-		static AssetBundle LoadAssetBundleDependcy(string path)
+		private static Dictionary<string,AssetBundle> _assetbundleDic = new Dictionary<string, AssetBundle>();
+
+		public static AssetBundle LoadAssetBundleDependcy(string path)
 		{        
 			if(_manifest == null)
 			{
@@ -50,8 +53,15 @@ namespace xLuaSimpleFramework
 		{
 			//all characters in assetbundle are lower characters
 			path = path.ToLower();
-			Debug.Log("path is " + path);
-			AssetBundle bundle = AssetBundle.LoadFromFile(ROOT_PATH + path);
+			AssetBundle bundle = null;
+			//cache bundles to ignore load the same bundle
+			_assetbundleDic.TryGetValue(path,out bundle);
+			if(bundle != null)
+			{
+				return bundle;
+			}
+			bundle = AssetBundle.LoadFromFile(ROOT_PATH + path);
+			_assetbundleDic[path] = bundle;
 			return bundle;
 		}
 
@@ -64,7 +74,6 @@ namespace xLuaSimpleFramework
 				int assetNameEnd = path.LastIndexOf(".");
 				string assetName = path.Substring(assetNameStart,assetNameEnd - assetNameStart);
 				T obj = bundle.LoadAsset(assetName) as T;
-				bundle.Unload(false);
 				return obj;
 			}
 			return null;

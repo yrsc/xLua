@@ -4,13 +4,11 @@ local rightBtn
 local midBtn
 local descLabel
 
-=======
->>>>>>> 3b46bd3e662f71264cc276b911b29826ee566b57
+
 function Awake()
     print("Lua Awake")
 end
 
-<<<<<<< HEAD
 function OnBtnClick(btn)	
   return function()
     if(btn == leftBtn) then
@@ -25,7 +23,6 @@ function OnBtnClick(btn)
     elseif(btn == midBtn) then
         descLabel.text = "midBtn"
     end
-=======
 local leftBtn
 local rightBtn
 local midBtn
@@ -33,12 +30,10 @@ function OnBtnClick(btn)
 	return function()
 		--print(btn.."left btn "..leftBtn)
 		if(btn == leftBtn) then print("left btn be clicked!") end
->>>>>>> 3b46bd3e662f71264cc276b911b29826ee566b57
 	end
 end
 
 
-<<<<<<< HEAD
 function Start()  
     print("Lua Start")
     local uiComponents = self.uiComponents

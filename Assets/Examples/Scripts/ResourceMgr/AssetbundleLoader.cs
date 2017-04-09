@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 namespace xLuaSimpleFramework
 {
@@ -8,7 +9,7 @@ namespace xLuaSimpleFramework
 	{
 		public static string ROOT_PATH = Application.dataPath + "/StreamingAssets/AssetBundle/";
 		private const string MANIFEST_SUFFIX = ".manifest";
-
+		public static string Download_Path = Application.persistentDataPath + "/AssetBundle/";
 		private static AssetBundleManifest _manifest;
 
 		static AssetbundleLoader()
@@ -60,7 +61,15 @@ namespace xLuaSimpleFramework
 			{
 				return bundle;
 			}
-			bundle = AssetBundle.LoadFromFile(ROOT_PATH + path);
+			string downloadBundlePath = Download_Path+path;
+			if(File.Exists(downloadBundlePath))
+			{
+				bundle = AssetBundle.LoadFromFile(downloadBundlePath);
+			}
+			else
+			{
+				bundle = AssetBundle.LoadFromFile(ROOT_PATH + path);
+			}
 			_assetbundleDic[path] = bundle;
 			return bundle;
 		}

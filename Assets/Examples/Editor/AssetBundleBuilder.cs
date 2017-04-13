@@ -12,23 +12,46 @@ public class AssetNode
 
 public class AssetBundleBuilder : Editor 
 {	
+	public static string AssetBundle_Path = Application.dataPath + "/StreamingAssets/AssetBundle";
+
 	//需要打包的资源路径，通常是prefab,lua,及其他数据。（贴图，动画，模型，材质等可以通过依赖自己关联上，不需要添加在该路径里，除非是特殊需要）
 	//注意这里是目录，单独零散的文件，可以新建一个目录，都放在里面打包
 	public static List<string> abResourcePath = new List<string>()
 	{
 		"Examples/Prefab",
-		//"Examples/Lua",
+	};
+
+	//需要打包的lua或者其他非txt结尾的文本文件,警告，不能包含以txt结尾的文件，否则会被自动删除
+	public static List<string> textResourcePath = new List<string>()
+	{
+		"Examples/Lua",
 	};
 		
 	[MenuItem("AssetBundle/BuildBundleWithBuildMap")]
 	public static void BuildAssetBundle()
 	{
+		Init();
 		CollectDependcy();
-		BuildAllBundle();
+		BuildResourceBuildMap();
+		BuildAssetBundleWithBuildMap();
+		DeleteCopyText();
+		AssetDatabase.SaveAssets();
+		AssetDatabase.Refresh();	
 	}
 
-	static void CollectDependcy()
+	static void Init()
 	{
+		_buildMap.Clear();
+		_leafNodes.Clear();
+		_allAssetNodes.Clear();
+	}
+
+	private static List<AssetNode> _leafNodes = new List<AssetNode>();
+	private static Dictionary<string,AssetNode> _allAssetNodes = new Dictionary<string, AssetNode>();
+	private static List<string> _buildMap = new List<string>();
+
+	static void CollectDependcy()
+	{		
 		for(int i = 0; i < abResourcePath.Count;i++)
 		{
 			string path = Application.dataPath + "/" + abResourcePath[i];
@@ -42,21 +65,18 @@ public class AssetBundleBuilder : Editor
 				FileInfo []files = dir.GetFiles("*", SearchOption.AllDirectories);			
 				for (int j = 0; j < files.Length; j++)
 				{		
-					if(files[j].Name.EndsWith(".meta"))
-						continue;
+					if(files[j].Name.EndsWith(".meta") || files[j].Name.EndsWith(".DS_Store"))
+						continue;	
 					//获得在文件在Assets下的目录，类似于Assets/Prefab/UI/xx.prefab
-					string fileRelativePath = files[j].FullName.Substring(Application.dataPath.Length-6);
+					string fileRelativePath = GetReleativeToAssets(files[j].FullName);
 					AssetNode root = new AssetNode();
 					root.path = fileRelativePath;
 					GetDependcyRecursive(fileRelativePath,root);
 				}	
 			}
 		}
-		PrintDependcy();
+		//PrintDependcy();
 	}
-
-	private static List<AssetNode> _leafNodes = new List<AssetNode>();
-	private static Dictionary<string,AssetNode> _allAssetNodes = new Dictionary<string, AssetNode>();
 
 	static void GetDependcyRecursive(string path,AssetNode parentNode)
 	{
@@ -81,7 +101,7 @@ public class AssetBundleBuilder : Editor
 				}
 				node.parents.Add(parentNode);
 			}
-			Debug.Log("dependcy path is " +dependcy[i] + " parent is " + parentNode.path);
+			//Debug.Log("dependcy path is " +dependcy[i] + " parent is " + parentNode.path);
 			GetDependcyRecursive(dependcy[i],node);
 		}
 		if(dependcy.Length == 0)
@@ -92,26 +112,17 @@ public class AssetBundleBuilder : Editor
 			}
 		}
 	}
-
-	static void PrintDependcy()
+		
+	static bool ShouldIgnoreDependcy(string path)
 	{
-		for(int i = 0; i < _leafNodes.Count; i++)
-		{
-			PrintDependcyRecursive(_leafNodes[i]);
-		}
-	}
-
-	static void PrintDependcyRecursive(AssetNode node)
-	{
-		for(int i = 0; i < node.parents.Count;i++)
-		{
-			PrintDependcyRecursive(node.parents[i]);
-		}
-		Debug.Log(node.path);
+		if(path.EndsWith(".cs"))
+			return true;
+		return false;
 	}
 		
-	//按照依赖关系的深度，从最底层往上遍历打包，如果一个叶子节点有多个父节点，则该叶子节点被多个资源依赖，该叶子节点需要打包
-	static void BuildAllBundle()
+	//按照依赖关系的深度，从最底层往上遍历打包，如果一个叶子节点有多个父节点，则该叶子节点被多个资源依赖，该叶子节点需要打包，如果一个节点没有
+	//父节点，则该叶子节点是最顶层的文件（prefab,lua...），需要打包。
+	static void BuildResourceBuildMap()
 	{
 		int maxDepth = GetMaxDepthOfLeafNodes();
 		while(_leafNodes.Count > 0)
@@ -121,7 +132,14 @@ public class AssetBundleBuilder : Editor
 			{
 				if(_leafNodes[i].depth == maxDepth)
 				{
-					Debug.Log("node is " + _leafNodes[i].path + " depth " + maxDepth);
+					//如果叶子节点有多个父节点或者没有父节点,打包该叶子节点
+					if(_leafNodes[i].parents.Count != 1)
+					{
+						if(!ShouldIgnoreDependcy(_leafNodes[i].path))
+						{
+							_buildMap.Add(_leafNodes[i].path);
+						}
+					}
 					_curDepthNode.Add(_leafNodes[i]);
 				}
 			}
@@ -141,6 +159,18 @@ public class AssetBundleBuilder : Editor
 		}
 	}
 
+	static void BuildAssetBundleWithBuildMap()
+	{
+		string prefix = "Assets";
+		AssetBundleBuild[] buildMapArray = new AssetBundleBuild[_buildMap.Count];
+		for(int i = 0;i < _buildMap.Count;i++)
+		{
+			buildMapArray[i].assetBundleName = _buildMap[i].Substring(prefix.Length+1);
+			buildMapArray[i].assetNames = new string[]{_buildMap[i]};
+		}
+		BuildPipeline.BuildAssetBundles(AssetBundle_Path, buildMapArray, BuildAssetBundleOptions.ChunkBasedCompression|BuildAssetBundleOptions.DeterministicAssetBundle, EditorUserBuildSettings.activeBuildTarget);	
+	}
+
 	static int GetMaxDepthOfLeafNodes()
 	{
 		_leafNodes.Sort((x,y)=> 
@@ -148,5 +178,60 @@ public class AssetBundleBuilder : Editor
 				return y.depth - x.depth;
 			});
 		return _leafNodes[0].depth;
+	}
+
+	static void BuildTextBuildMap()
+	{
+		for(int i = 0; i < textResourcePath.Count;i++)
+		{
+			string path = Application.dataPath + "/" + textResourcePath[i];
+			if(!Directory.Exists(path))
+			{
+				Debug.LogError(string.Format("textResourcePath {0} not exist",textResourcePath[i]));
+			}
+			else
+			{
+				DirectoryInfo dir = new DirectoryInfo(path);
+				FileInfo []files = dir.GetFiles("*", SearchOption.AllDirectories);			
+				for (int j = 0; j < files.Length; j++)
+				{		
+					if(files[j].Name.EndsWith(".meta") || files[j].Name.EndsWith(".DS_Store"))
+						continue;		
+					string destPath = files[j].FullName + ".txt";
+					File.Copy(files[j].FullName,destPath);
+					_buildMap.Add(GetReleativeToAssets(destPath));
+				}	
+			}
+		}
+	}
+
+	static void DeleteCopyText()
+	{
+		for(int i = 0; i < textResourcePath.Count;i++)
+		{
+			string path = Application.dataPath + "/" + textResourcePath[i];
+			if(!Directory.Exists(path))
+			{
+				Debug.LogError(string.Format("textResourcePath {0} not exist",textResourcePath[i]));
+			}
+			else
+			{
+				DirectoryInfo dir = new DirectoryInfo(path);
+				FileInfo []files = dir.GetFiles("*", SearchOption.AllDirectories);			
+				for (int j = 0; j < files.Length; j++)
+				{		
+					if(files[j].Name.EndsWith(".txt"))
+						continue;		
+					File.Delete(files[j].FullName);
+				}	
+			}
+		}
+	}
+
+	static string GetReleativeToAssets(string fullName)
+	{
+		//获得在文件在Assets下的目录，类似于Assets/Lua/UI/xx.lua
+		string fileRelativePath = fullName.Substring(Application.dataPath.Length-6);
+		return fileRelativePath;
 	}
 }
